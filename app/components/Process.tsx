@@ -102,8 +102,15 @@ export default function Process() {
                   <div className="relative h-12 w-12 rounded-full bg-paper border border-stone-300 flex items-center justify-center shadow-[0_8px_20px_-8px_rgba(10,31,61,0.2)]">
                     <motion.span
                       aria-hidden
-                      className="absolute inset-0 rounded-full ring-2 ring-gold/0"
-                      whileInView={{ ringColor: ["rgba(201,169,97,0)", "rgba(201,169,97,0.6)", "rgba(201,169,97,0)"] }}
+                      className="absolute inset-0 rounded-full border border-gold/0"
+                      initial={{ boxShadow: "0 0 0 0 rgba(201,169,97,0)" }}
+                      whileInView={{
+                        boxShadow: [
+                          "0 0 0 0 rgba(201,169,97,0)",
+                          "0 0 0 6px rgba(201,169,97,0.35)",
+                          "0 0 0 12px rgba(201,169,97,0)",
+                        ],
+                      }}
                       viewport={{ once: true }}
                       transition={{ duration: 2.4, delay: 0.2 }}
                     />

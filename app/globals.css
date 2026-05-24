@@ -49,27 +49,52 @@
 }
 
 /* Custom CSS outside Tailwind layers */
-.gold-word {
-  color: #6e5320;
-  text-decoration-line: underline;
-  text-decoration-style: wavy;
-  text-decoration-color: rgba(201, 169, 97, 0.85);
-  text-decoration-thickness: 1.5px;
-  text-underline-offset: 0.18em;
-  animation: gold-glow 12s ease-in-out infinite alternate;
+/* Polished metallic gold word — vertical gradient base + diagonal sweep overlay */
+.gold-fancy {
+  background: linear-gradient(
+    180deg,
+    #7a5f25 0%,
+    #a8853b 25%,
+    #d4b46a 48%,
+    #e3c98a 52%,
+    #a8853b 75%,
+    #7a5f25 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  position: relative;
 }
-@keyframes gold-glow {
-  from {
-    color: #6e5320;
-    text-shadow: 0 0 0 rgba(201, 169, 97, 0);
+.gold-fancy::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 38%,
+    rgba(255, 245, 210, 0.85) 49%,
+    rgba(255, 250, 220, 1) 50%,
+    rgba(255, 245, 210, 0.85) 51%,
+    transparent 62%
+  );
+  background-size: 220% 100%;
+  background-position: 150% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  pointer-events: none;
+  animation: gold-glint 9s ease-in-out infinite alternate;
+}
+@keyframes gold-glint {
+  0% {
+    background-position: 180% 0;
   }
-  to {
-    color: #8f6c2a;
-    text-shadow: 0 0 24px rgba(201, 169, 97, 0.35);
+  100% {
+    background-position: -80% 0;
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .gold-word {
+  .gold-fancy::after {
     animation: none;
   }
 }

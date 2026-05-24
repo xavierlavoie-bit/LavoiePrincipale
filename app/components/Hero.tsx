@@ -10,15 +10,8 @@ import {
 } from "framer-motion";
 import { useRef } from "react";
 import SplitWords from "./motion/SplitWords";
-import Counter from "./motion/Counter";
 import MagneticButton from "./motion/MagneticButton";
-
-const stats = [
-  { v: 150, suf: "+", l: "Familles" },
-  { v: 97, suf: "%", l: "Rétention" },
-  { v: 15, suf: "+", l: "Années" },
-  { v: 24, suf: "h", l: "Réponse" },
-];
+import GrowthChart from "./GrowthChart";
 
 export default function Hero() {
   const ref = useRef<HTMLDivElement>(null);
@@ -116,25 +109,41 @@ export default function Hero() {
               <SplitWords delay={0.7} stagger={0.05}>
                 les
               </SplitWords>{" "}
-              <span className="gold-word font-medium">générations.</span>
+              <span className="relative inline-block align-baseline">
+                <span className="gold-fancy font-medium" data-text="générations.">
+                  générations.
+                </span>
+                <svg
+                  className="absolute left-0 right-0 pointer-events-none"
+                  style={{ bottom: "-0.12em", width: "100%" }}
+                  viewBox="0 0 400 8"
+                  preserveAspectRatio="none"
+                  aria-hidden
+                >
+                  <path
+                    d="M2 4 Q 200 0, 398 4"
+                    stroke="#b8964a"
+                    strokeWidth="1.4"
+                    fill="none"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </span>
             </h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 1.3, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-7 max-w-xl text-base lg:text-lg leading-relaxed text-stone-700 text-pretty"
+              transition={{ duration: 1, delay: 1.3, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-8 max-w-xl"
             >
-              Une approche personnalisée, discrète et rigoureuse pour les
-              familles, professionnels et entrepreneurs qui exigent davantage
-              de leur conseiller. Conseil, stratégie et accompagnement —
-              au-delà du chiffre.
-            </motion.p>
+              <GrowthChart />
+            </motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 1.5 }}
+              transition={{ duration: 0.7, delay: 1.7 }}
               className="mt-8 flex flex-wrap items-center gap-3"
             >
               <MagneticButton
@@ -172,35 +181,12 @@ export default function Hero() {
               </MagneticButton>
             </motion.div>
 
-            {/* Inline stats — replaces the bottom strip */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 1.7 }}
-              className="mt-10 lg:mt-12 grid grid-cols-4 divide-x divide-stone-200 border-y border-stone-200"
-            >
-              {stats.map((s) => (
-                <div
-                  key={s.l}
-                  className="px-3 py-4 lg:px-4 lg:py-5 group relative overflow-hidden"
-                >
-                  <div className="font-display text-2xl lg:text-3xl text-midnight leading-none tabular-nums">
-                    <Counter value={s.v} suffix={s.suf} />
-                  </div>
-                  <div className="mt-1.5 text-[10px] uppercase tracking-[0.18em] text-stone-500">
-                    {s.l}
-                  </div>
-                  <span className="absolute bottom-0 left-0 h-px w-0 bg-gold transition-all duration-700 group-hover:w-full" />
-                </div>
-              ))}
-            </motion.div>
-
             {/* Credentials inline */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1, delay: 1.9 }}
-              className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-[11px] uppercase tracking-[0.16em] text-stone-500"
+              className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 text-[11px] uppercase tracking-[0.16em] text-stone-500"
             >
               <span className="inline-flex items-center gap-2">
                 <svg viewBox="0 0 24 24" className="h-3 w-3 text-gold-deep" fill="currentColor">
