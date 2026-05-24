@@ -116,32 +116,7 @@ export default function Hero() {
               <SplitWords delay={0.7} stagger={0.05}>
                 les
               </SplitWords>{" "}
-              <motion.span
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1.2, delay: 0.85, ease: [0.16, 1, 0.3, 1] }}
-                className="gold-sheen font-medium"
-                data-text="générations."
-              >
-                générations.
-                <motion.svg
-                  className="absolute -bottom-1 left-0 w-full pointer-events-none"
-                  viewBox="0 0 400 12"
-                  preserveAspectRatio="none"
-                  aria-hidden
-                >
-                  <motion.path
-                    d="M2 8 Q 100 2, 200 6 T 398 4"
-                    stroke="#c9a961"
-                    strokeWidth="1.5"
-                    fill="none"
-                    strokeLinecap="round"
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: 1 }}
-                    transition={{ duration: 1.4, delay: 1.3, ease: [0.16, 1, 0.3, 1] }}
-                  />
-                </motion.svg>
-              </motion.span>
+              <span className="gold-word font-medium">générations.</span>
             </h1>
 
             <motion.p
