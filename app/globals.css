@@ -1,26 +1,165 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-ivory: #f7f4ec;
+  --color-cream: #f1ecdf;
+  --color-bone: #e6dfcb;
+  --color-paper: #fbf9f3;
+  --color-midnight: #0a1f3d;
+  --color-deep-blue: #122e5c;
+  --color-royal: #1f3a8a;
+  --color-ink-blue: #06152b;
+  --color-gold: #c9a961;
+  --color-gold-soft: #d8be84;
+  --color-gold-deep: #6e5320;
+  --color-ink: #0a0a0a;
+  --color-charcoal: #1a1a1a;
+  --color-stone-700: #3d3a33;
+  --color-stone-600: #524d42;
+  --color-stone-500: #6b6557;
+  --color-stone-400: #6f6a5d;
+  --color-stone-300: #a8a18d;
+  --color-stone-200: #d8d1bc;
+
+  --font-display: var(--font-cormorant), "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-sans: var(--font-inter), Inter, ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jet-mono), ui-monospace, monospace;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    color-scheme: light;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11", "calt";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: var(--color-midnight);
+    color: var(--color-gold-soft);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Custom CSS outside Tailwind layers */
+.gold-sheen {
+  position: relative;
+  color: #6e5320;
+}
+
+.gold-sheen::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+    -105deg,
+    transparent 38%,
+    rgba(255, 235, 180, 0.95) 48%,
+    rgba(255, 250, 220, 1) 50%,
+    rgba(255, 235, 180, 0.95) 52%,
+    transparent 62%
+  );
+  background-size: 220% 100%;
+  background-position: 210% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  pointer-events: none;
+  animation: gold-sweep 3.2s cubic-bezier(0.16, 1, 0.3, 1) 3s 1 forwards;
+}
+@keyframes gold-sweep {
+  to {
+    background-position: -110% 0;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+    font-feature-settings: "lnum", "kern", "liga", "dlig";
+    letter-spacing: -0.015em;
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .rule-gold {
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      var(--color-gold) 25%,
+      var(--color-gold) 75%,
+      transparent 100%
+    );
+  }
+  .grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(
+        circle at 1px 1px,
+        rgba(10, 31, 61, 0.06) 1px,
+        transparent 0
+      );
+    background-size: 3px 3px;
+    pointer-events: none;
+    opacity: 0.5;
+    z-index: 0;
+  }
+  .ornament-line {
+    background-image: linear-gradient(
+      to right,
+      transparent,
+      currentColor 20%,
+      currentColor 80%,
+      transparent
+    );
+    height: 1px;
+  }
+  .fade-up {
+    animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .fade-up-slow {
+    animation: fadeUp 1.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .marquee {
+    animation: marquee 60s linear infinite;
+  }
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  .gilded {
+    color: #6e5320;
+  }
 }
